@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       restaurants = items.map((item) {
       List dishListJson = item['menu'] ?? [];
-      List<Dish> dishList = dishListJson.map((dishJson) => Dish(name: dishJson['name'], price: dishJson['price'])).toList();
+      List<Dish> dishList = dishListJson.map((dishJson) => Dish(name: dishJson['name'], price: dishJson['price'], image: (dishJson['image'] ?? ''))).toList();
       return Restaurant(
           title: item['title'],
           description: item['description'],
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           final restaurant = restaurants[index];
           debugPrint('restaurant: $restaurant');
           return ListTile(
-            leading: Image.asset('assets/images/${restaurant.image}'),
+            leading: Image.asset(restaurant.image),
             title: Text(restaurant.title),
             subtitle: Text(restaurant.description),
             onTap: () async {

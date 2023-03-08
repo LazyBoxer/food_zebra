@@ -14,7 +14,8 @@ class Restaurant {
 
 class Dish {
   String name;
+  String image;
   double price;
 
-  Dish({required this.name, required this.price});
+  Dish({required this.name, required this.price, required this.image});
 }
