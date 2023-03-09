@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'home.dart';
 import 'cart.dart';
-import 'settings.dart';
+import 'account.dart';
 
 void main() {
   runApp(const MyApp());
@@ -73,13 +73,17 @@ class _MyHomePageState extends State<MainPage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     final widgetOptions = [
-    HomePage(toCart: () {
+      HomePage(toCart: () {
         setState(() {
           _selectedIndex = 1;
         });
       }),
-      const CartPage(),
-      const SettingsPage(),
+      CartPage(toHome: () {
+        setState(() {
+          _selectedIndex = 0;
+        });
+      }),
+      const AccountPage(),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -101,8 +105,8 @@ class _MyHomePageState extends State<MainPage> {
             label: 'Cart',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.account_box),
+            label: 'Account',
           ),
         ],
         onTap: _onItemTapped,

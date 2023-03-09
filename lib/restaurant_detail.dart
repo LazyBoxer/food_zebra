@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 
-import 'package:food_zebra/models/restaurant.dart';
+import 'package:food_zebra/models/model.dart';
 import 'package:food_zebra/state/global_state.dart';
 import 'package:provider/provider.dart';
 

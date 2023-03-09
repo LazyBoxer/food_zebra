@@ -40,6 +40,7 @@ dependencies:
   provider: ^6.0.5
   google_maps_flutter: ^2.2.5
   location: ^4.4.0
+  image_picker: ^0.8.6
 
 dev_dependencies:
   flutter_test:
@@ -66,12 +67,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/restaurantDataSource.json
-    - assets/images/burger_king/burger_king.jpg
-    - assets/images/kfc/kfc.jpg
-    - assets/images/mcdonalds/mcdonalds.jpg
-    - assets/images/pizza_hut/pizza_hut.jpg
-    - assets/images/starbucks/starbucks.jpg
-    - assets/images/subway/subway.jpg
+    - assets/images/burger_king.jpg
+    - assets/images/kfc.jpg
+    - assets/images/mcdonalds.jpg
+    - assets/images/pizza_hut.jpg
+    - assets/images/starbucks.jpg
+    - assets/images/subway.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

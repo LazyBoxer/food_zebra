@@ -26,12 +26,16 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera Usage Description</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Get Location Always and In Usage</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Get Location Always Usage</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Get Location In Usage</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Usage Description</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

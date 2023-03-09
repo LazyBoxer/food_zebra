@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 
 class StoreMap extends StatefulWidget {
   final LatLng targetPosition;
@@ -15,8 +14,7 @@ class StoreMap extends StatefulWidget {
 
 class StoreMapState extends State<StoreMap> {
   final Completer<GoogleMapController> _controller = Completer();
-  final Location _location = Location();
-  LatLng? _currentPosition;
+  final LatLng _currentPosition = const LatLng(25.048174640602493, 121.5171156616663);
 
   @override
   void initState() {
@@ -25,47 +23,82 @@ class StoreMapState extends State<StoreMap> {
   }
 
   Future<void> _getCurrentLocation() async {
-    try {
-      debugPrint('locationData start');
-      var locationData = await _location.getLocation();
-      debugPrint('locationData: $locationData');
-      setState(() {
-        _currentPosition = LatLng(locationData.latitude ?? 0.0, locationData.longitude ?? 0.0);
-      });
-    } catch (error) {
-      debugPrint('Error: $error');
-    }
+    // bool serviceEnabled;
+    // PermissionStatus permissionGranted;
+
+    // serviceEnabled = await _location.serviceEnabled();
+    // if (!serviceEnabled) {
+    //   serviceEnabled = await _location.requestService();
+    //   if (!serviceEnabled) {
+    //     return;
+    //   }
+    // }
+
+    // permissionGranted = await _location.hasPermission();
+    // if (permissionGranted == PermissionStatus.denied) {
+    //   permissionGranted = await _location.requestPermission();
+    //   if (permissionGranted != PermissionStatus.granted) {
+    //     return;
+    //   }
+    // }
+
+    // try {
+    //   // LocationData locationData = await _location.getLocation();
+    //   setState(() {
+    //     _currentPosition = const LatLng(25.048174640602493, 121.5171156616663);
+    //   });
+    // } catch (error) {
+    //   debugPrint('Error: $error');
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
-    return _currentPosition == null
-        ? const Center(
-            child: CircularProgressIndicator(),
-          )
-        : GoogleMap(
-            mapType: MapType.normal,
-            initialCameraPosition: CameraPosition(
-              target: _currentPosition!,
-              zoom: 15,
-            ),
-            markers: {
-              Marker(
-                markerId: const MarkerId('currentPosition'),
-                position: _currentPosition!,
-                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-                infoWindow: const InfoWindow(title: 'You are here'),
-              ),
-              Marker(
-                markerId: const MarkerId('targetPosition'),
-                position: widget.targetPosition,
-                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-                infoWindow: const InfoWindow(title: 'Target'),
-              ),
-            },
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-          );
+    return GoogleMap(
+      mapType: MapType.normal,
+      initialCameraPosition: CameraPosition(
+        target: _currentPosition,
+        zoom: 15,
+      ),
+      markers: {
+        Marker(
+          markerId: const MarkerId('currentPosition'),
+          position: _currentPosition,
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+          infoWindow: const InfoWindow(title: 'You are here'),
+        ),
+        Marker(
+          markerId: const MarkerId('targetPosition'),
+          position: widget.targetPosition,
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+          infoWindow: const InfoWindow(title: 'Target'),
+        ),
+      },
+      cameraTargetBounds: _getBounds(),
+      onMapCreated: (GoogleMapController controller) {
+        _controller.complete(controller);
+      },
+    );
+  }
+
+  CameraTargetBounds _getBounds() {
+    final southwest = LatLng(
+      _currentPosition.latitude < widget.targetPosition.latitude
+          ? _currentPosition.latitude
+          : widget.targetPosition.latitude,
+      _currentPosition.longitude < widget.targetPosition.longitude
+          ? _currentPosition.longitude
+          : widget.targetPosition.longitude,
+    );
+    final northeast = LatLng(
+      _currentPosition.latitude > widget.targetPosition.latitude
+          ? _currentPosition.latitude
+          : widget.targetPosition.latitude,
+      _currentPosition.longitude > widget.targetPosition.longitude
+          ? _currentPosition.longitude
+          : widget.targetPosition.longitude,
+    );
+    return CameraTargetBounds(
+        LatLngBounds(southwest: southwest, northeast: northeast));
   }
 }

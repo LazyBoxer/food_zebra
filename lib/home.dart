@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:food_zebra/models/restaurant.dart';
+import 'package:food_zebra/models/model.dart';
+import 'package:food_zebra/state/global_state.dart';
+import 'package:provider/provider.dart';
 import 'dart:convert';
 
 import 'restaurant_detail.dart';
@@ -37,6 +39,8 @@ class _HomePageState extends State<HomePage> {
           title: item['title'],
           description: item['description'],
           image: item['image'],
+          lat: item['lat'],
+          lng: item['lng'],
           menu: dishList
         );
     }).toList();
@@ -56,12 +60,12 @@ class _HomePageState extends State<HomePage> {
             title: Text(restaurant.title),
             subtitle: Text(restaurant.description),
             onTap: () async {
+              Provider.of<GlobalState>(context, listen: false).setSelectedRestaurant(restaurant);
               final result = await Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => RestaurantDetailPage(restaurant: restaurant)),
               );
-              debugPrint('result: $result');
               if (result == 'toCart') {
                 widget.toCart();
               }
