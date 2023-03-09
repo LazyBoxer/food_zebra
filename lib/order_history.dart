@@ -26,7 +26,6 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
 
   Future<void> _loadData() async {
     List<Order> orders = await getOrders();
-    debugPrint('orders: $orders');
     setState(() {
       _savedOrders = orders;
     });

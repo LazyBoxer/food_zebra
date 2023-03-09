@@ -54,7 +54,6 @@ class _HomePageState extends State<HomePage> {
         itemCount: restaurants.length,
         itemBuilder: (BuildContext context, int index) {
           final restaurant = restaurants[index];
-          debugPrint('restaurant: $restaurant');
           return ListTile(
             leading: Image.asset(restaurant.image),
             title: Text(restaurant.title),

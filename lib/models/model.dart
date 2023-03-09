@@ -49,7 +49,7 @@ class Restaurant {
 class Dish {
   String name;
   String image;
-  double price;
+  int price;
 
   Dish({required this.name, required this.price, required this.image});
 

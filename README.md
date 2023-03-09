@@ -1,16 +1,22 @@
-# food_zebra
+# Food Zebra
 
-A new Flutter project.
+只是一個非常簡單且沒實際功能，看起來有點像點餐 App 的小 Demo
+一進入就會看到三個 Tab，分別是 Home, Cart 和 Account
 
-## Getting Started
+## Home
+有餐廳列表，點擊下去後可以進入該餐廳的菜單，再點擊就加入購物車
 
-This project is a starting point for a Flutter application.
+## Cart
+1. 一張地圖，藍色是現在位置，紅色是餐廳位置
+(因為實作拿取真實位置時遇到 bug，時間問題就先寫死在台北車站，其他資料透過一個 json 控制)
 
-A few resources to get you started if this is your first Flutter project:
+2. 餐點的清單
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3. 金額總計和送出按鈕
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Account
+裡面就很簡單的兩個按鈕：歷史清單 和 問題回報
+### 歷史清單
+目前只有放之前點了哪些餐廳，細節還沒有時間可以補上，但資料有存起來，可以參考 models/model.dart 檔案
+### 問題回報
+可以選擇一張圖片，還有描述問題的輸入匡，最後是一個送出按鈕，按下去就不會送出任何東西
