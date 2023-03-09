@@ -56,7 +56,7 @@ class _CartPageState extends State<CartPage> {
           })),
           Consumer<GlobalState>(builder: (context, state, child) {
             return Text(
-                '總計金額: ${state.dishes.fold(0.0, (previousValue, element) => previousValue + element.price)}',
+                '總計金額: ${state.dishes.fold(0, (previousValue, element) => previousValue + element.price)}',
                 style: const TextStyle(fontSize: 20.0));
           }),
           Container(
